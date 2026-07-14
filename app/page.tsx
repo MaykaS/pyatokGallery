@@ -39,7 +39,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const currentPath = `/${buildGalleryQuery(sortOrder, mediumFilter)}`;
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-[1400px] flex-col px-6 pb-12 pt-0">
+    <main className="mx-auto flex min-h-screen w-full max-w-[1400px] flex-col px-4 pb-10 pt-0 sm:px-6 sm:pb-12">
       <SiteHeader
         adminHref="/admin"
         artistName={dictionary.artistName}
@@ -50,7 +50,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       />
 
       <section className="flex flex-col gap-[13px] px-0 pt-[18px] sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="-mx-1 flex flex-wrap items-center gap-2 sm:mx-0">
           <a
             className={getChipClassName(mediumFilter === "all")}
             href={`/${buildGalleryQuery(sortOrder, "all")}`}
@@ -69,10 +69,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           ))}
         </div>
 
-        <form action="/" className="flex items-center gap-2 self-start">
+        <form action="/" className="w-full sm:w-auto">
           <input name="medium" type="hidden" value={mediumFilter} />
           <select
-            className="ui-input w-auto min-h-[30px] min-w-0 px-2 py-1 text-[12px]"
+            className="ui-input min-h-[30px] w-full min-w-0 px-2 py-1 text-[12px] sm:w-auto"
             defaultValue={sortOrder}
             id="sort"
             name="sort"

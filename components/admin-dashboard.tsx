@@ -117,7 +117,7 @@ export function AdminDashboard({ artworks, t }: AdminDashboardProps) {
   }
 
   return (
-    <section className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,360px)] lg:items-start">
+    <section className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(320px,360px)] lg:items-start lg:gap-10">
       <div>
         <h2 className="font-heading text-3xl text-[var(--text-color)]">
           {editingArtwork ? t.editArtwork : t.uploadArtwork}
@@ -158,7 +158,7 @@ export function AdminDashboard({ artworks, t }: AdminDashboardProps) {
           {t.existingArtworks}
         </h2>
 
-        <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-1">
           {artworks.map((artwork) => (
             <article
               className="border border-[var(--border-color)] p-4"
@@ -252,7 +252,7 @@ function ArtworkEditorForm({
         ) : null}
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
         <div className="space-y-2">
           <label className="ui-label" htmlFor="title">
             {t.title}

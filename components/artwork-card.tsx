@@ -18,7 +18,7 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
       </div>
 
       <div className="mt-[13px] text-center">
-        <h2 className="font-heading text-[18px] italic text-[var(--text-color)]">
+        <h2 className="font-heading text-[17px] italic text-[var(--text-color)] sm:text-[18px]">
           {artwork.title}
         </h2>
         <p className="mt-1 text-[12px] text-[var(--muted-color)]">

@@ -20,10 +20,10 @@ export default async function AdminDashboardPage() {
   const artworks = await getAllArtworks();
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 pb-16 pt-6 sm:px-6 lg:px-8">
+    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 pb-12 pt-5 sm:px-6 sm:pb-16 sm:pt-6 lg:px-8">
       <div className="flex flex-col gap-3 border-b border-[var(--border-color)] pb-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="font-heading text-4xl text-[var(--text-color)]">
+          <h1 className="font-heading text-[34px] text-[var(--text-color)] sm:text-4xl">
             {dictionary.dashboardTitle}
           </h1>
           <p className="mt-2 text-sm uppercase tracking-[0.16em] text-[var(--muted-color)]">

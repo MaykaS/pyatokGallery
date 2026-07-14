@@ -117,6 +117,7 @@ textarea:focus-visible {
   font-family: var(--font-cormorant), serif;
   font-size: 14px;
   line-height: 1.2;
+  min-height: 40px;
   padding: 9px 16px;
 }
 
@@ -171,7 +172,8 @@ textarea:focus-visible {
   border-radius: 3px;
   font-size: 11px;
   letter-spacing: 0.02em;
-  padding: 3px 10px;
+  min-height: 30px;
+  padding: 4px 10px;
 }
 
 .tag-chip-active {
