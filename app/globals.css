@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+:root {
+  --background-color: #fbfaf8;
+  --surface-color: #f1eeea;
+  --text-color: #1f1d1a;
+  --soft-text-color: #38342f;
+  --muted-color: #716a61;
+  --border-color: #d9d1c7;
+  --error-color: #8a3e34;
+}
+
+@theme inline {
+  --color-background: var(--background-color);
+  --color-foreground: var(--text-color);
+  --font-heading: var(--font-pt-serif);
+  --font-sans: var(--font-ibm-plex-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background-color);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-ibm-plex-sans), sans-serif;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  transition:
+    color 150ms ease,
+    border-color 150ms ease,
+    background-color 150ms ease,
+    opacity 150ms ease,
+    transform 150ms ease;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--text-color);
+  outline-offset: 2px;
+}
+
+.font-heading {
+  font-family: var(--font-pt-serif), serif;
+}
+
+.art-plate {
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+  padding: 0.75rem;
+}
+
+.ui-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-color);
+}
+
+.ui-input,
+.ui-textarea,
+.ui-file-input {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-color);
+  font-size: 0.95rem;
+  padding: 0.75rem 0.9rem;
+}
+
+.ui-textarea {
+  resize: vertical;
+}
+
+.ui-input:hover,
+.ui-textarea:hover,
+.ui-file-input:hover {
+  border-color: var(--text-color);
+}
+
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--text-color);
+  background: transparent;
+  color: var(--text-color);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  padding: 0.8rem 1.2rem;
+  text-transform: uppercase;
+}
+
+.ui-button:hover {
+  background: var(--surface-color);
+}
+
+.ui-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ui-button-muted {
+  border-color: var(--border-color);
+  color: var(--muted-color);
+}
+
+.ui-button-muted:hover {
+  border-color: var(--text-color);
+  color: var(--text-color);
+}
+
+.ui-link {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-color);
+}
+
+.ui-link:hover {
+  color: var(--text-color);
+}
+
+.icon-button {
+  display: inline-flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  color: var(--muted-color);
+}
+
+.icon-button:hover {
+  border-color: var(--text-color);
+  color: var(--text-color);
+}
