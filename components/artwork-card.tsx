@@ -12,7 +12,7 @@ export function ArtworkCard({ artwork }: ArtworkCardProps) {
       <div className="art-plate overflow-hidden">
         <img
           alt={artwork.title}
-          className="aspect-[4/5] h-auto w-full object-cover transition-transform duration-300 group-hover:scale-[1.01]"
+          className="w-full transition-transform duration-300 group-hover:scale-[1.005]"
           src={artwork.image_url}
         />
       </div>

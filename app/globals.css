@@ -68,7 +68,12 @@ textarea:focus-visible {
   outline: 1px solid var(--border-color);
   background: var(--surface-color);
   padding: 0;
-  filter: sepia(0.22) saturate(0.82) contrast(1.05);
+}
+
+.art-plate img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .ui-label {
