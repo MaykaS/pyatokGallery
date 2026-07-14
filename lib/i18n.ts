@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import type { Dictionary, Locale } from "@/lib/types";
 
 export const DEFAULT_LOCALE: Locale = "en";
-export const LOCALE_COOKIE = "sagalin-locale";
+export const LOCALE_COOKIE = "pyatok-locale";
 
 const DICTIONARIES: Record<Locale, Dictionary> = {
   en: {
@@ -13,7 +13,7 @@ const DICTIONARIES: Record<Locale, Dictionary> = {
     addArtwork: "Add to gallery",
     all: "All",
     apply: "Apply",
-    artistName: "Sagalin",
+    artistName: "Pyatok",
     backToGallery: "Back to gallery",
     cancel: "Cancel",
     createdMessage: "Artwork added to the gallery.",
@@ -29,7 +29,7 @@ const DICTIONARIES: Record<Locale, Dictionary> = {
     editArtwork: "Edit artwork",
     enter: "Enter",
     existingArtworks: "Existing artworks",
-    galleryTitle: "Sagalin Gallery",
+    galleryTitle: "Pyatok Gallery",
     image: "Image",
     incorrectPassword: "Incorrect password.",
     localeEnglish: "EN",

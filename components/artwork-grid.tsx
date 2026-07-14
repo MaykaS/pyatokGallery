@@ -16,7 +16,7 @@ export function ArtworkGrid({ artworks, t }: ArtworkGridProps) {
   }
 
   return (
-    <section className="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-3">
+    <section className="grid grid-cols-1 gap-x-6 gap-y-9 px-0 pb-0 pt-[27px] sm:grid-cols-3">
       {artworks.map((artwork) => (
         <ArtworkCard artwork={artwork} key={artwork.id} />
       ))}

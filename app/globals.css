@@ -1,20 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background-color: #fbfaf8;
-  --surface-color: #f1eeea;
-  --text-color: #1f1d1a;
-  --soft-text-color: #38342f;
-  --muted-color: #716a61;
-  --border-color: #d9d1c7;
-  --error-color: #8a3e34;
+  --background-color: #f3f2f2;
+  --surface-color: #eae9e9;
+  --text-color: #201f1d;
+  --soft-text-color: #444141;
+  --muted-color: #7d7979;
+  --border-color: rgba(32, 31, 29, 0.16);
+  --subtle-border-color: #d7d3d3;
+  --accent-color: #b68235;
+  --error-color: #7d5411;
 }
 
 @theme inline {
   --color-background: var(--background-color);
   --color-foreground: var(--text-color);
-  --font-heading: var(--font-pt-serif);
-  --font-sans: var(--font-ibm-plex-sans);
+  --font-heading: var(--font-cormorant);
+  --font-sans: var(--font-lora);
 }
 
 * {
@@ -29,7 +31,9 @@ body {
   min-height: 100vh;
   background: var(--background-color);
   color: var(--text-color);
-  font-family: var(--font-ibm-plex-sans), sans-serif;
+  font-family: var(--font-lora), serif;
+  font-size: 15px;
+  line-height: 1.55;
 }
 
 a,
@@ -55,18 +59,21 @@ textarea:focus-visible {
 }
 
 .font-heading {
-  font-family: var(--font-pt-serif), serif;
+  font-family: var(--font-cormorant), serif;
 }
 
 .art-plate {
-  border: 1px solid var(--border-color);
+  box-sizing: border-box;
+  border: 6px solid var(--surface-color);
+  outline: 1px solid var(--border-color);
   background: var(--surface-color);
-  padding: 0.75rem;
+  padding: 0;
+  filter: sepia(0.22) saturate(0.82) contrast(1.05);
 }
 
 .ui-label {
   display: block;
-  font-size: 0.75rem;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted-color);
@@ -79,8 +86,10 @@ textarea:focus-visible {
   border: 1px solid var(--border-color);
   background: transparent;
   color: var(--text-color);
-  font-size: 0.95rem;
-  padding: 0.75rem 0.9rem;
+  font: inherit;
+  font-size: 14px;
+  min-height: 36px;
+  padding: 6px 10px;
 }
 
 .ui-textarea {
@@ -97,17 +106,17 @@ textarea:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--accent-color);
   background: transparent;
-  color: var(--text-color);
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  padding: 0.8rem 1.2rem;
-  text-transform: uppercase;
+  color: var(--accent-color);
+  font-family: var(--font-cormorant), serif;
+  font-size: 14px;
+  line-height: 1.2;
+  padding: 9px 16px;
 }
 
 .ui-button:hover {
-  background: var(--surface-color);
+  background: color-mix(in srgb, var(--accent-color) 12%, transparent);
 }
 
 .ui-button:disabled {
@@ -121,14 +130,13 @@ textarea:focus-visible {
 }
 
 .ui-button-muted:hover {
-  border-color: var(--text-color);
+  border-color: var(--border-color);
   color: var(--text-color);
+  background: color-mix(in srgb, var(--text-color) 7%, transparent);
 }
 
 .ui-link {
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-size: 13px;
   color: var(--muted-color);
 }
 
@@ -149,4 +157,33 @@ textarea:focus-visible {
 .icon-button:hover {
   border-color: var(--text-color);
   color: var(--text-color);
+  background: color-mix(in srgb, var(--text-color) 7%, transparent);
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 3px;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  padding: 3px 10px;
+}
+
+.tag-chip-active {
+  background: #fff3e4;
+  color: #7d5411;
+}
+
+.tag-chip-idle {
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+.tag-chip-idle:hover {
+  background: color-mix(in srgb, var(--accent-color) 10%, transparent);
+}
+
+.editorial-copy {
+  text-align: justify;
+  text-wrap: pretty;
 }

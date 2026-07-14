@@ -39,7 +39,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const currentPath = `/${buildGalleryQuery(sortOrder, mediumFilter)}`;
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 pb-12 pt-6 sm:px-6 lg:px-8">
+    <main className="mx-auto flex min-h-screen w-full max-w-[1400px] flex-col px-6 pb-12 pt-0">
       <SiteHeader
         adminHref="/admin"
         artistName={dictionary.artistName}
@@ -49,8 +49,8 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         t={dictionary}
       />
 
-      <section className="mt-8 flex flex-col gap-3 border-t border-[var(--border-color)] pt-5 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex flex-wrap gap-2">
+      <section className="flex flex-col gap-[13px] px-0 pt-[18px] sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap items-center gap-2">
           <a
             className={getChipClassName(mediumFilter === "all")}
             href={`/${buildGalleryQuery(sortOrder, "all")}`}
@@ -69,13 +69,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           ))}
         </div>
 
-        <form action="/" className="flex items-center gap-2">
+        <form action="/" className="flex items-center gap-2 self-start">
           <input name="medium" type="hidden" value={mediumFilter} />
-          <label className="ui-label" htmlFor="sort">
-            {dictionary.sortLabel}
-          </label>
           <select
-            className="ui-input min-w-36"
+            className="ui-input w-auto min-h-[30px] min-w-0 px-2 py-1 text-[12px]"
             defaultValue={sortOrder}
             id="sort"
             name="sort"
@@ -83,13 +80,19 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             <option value="newest">{dictionary.sortNewest}</option>
             <option value="oldest">{dictionary.sortOldest}</option>
           </select>
-          <button className="ui-button" type="submit">
-            {dictionary.apply}
-          </button>
         </form>
       </section>
 
       <ArtworkGrid artworks={visibleArtworks} t={dictionary} />
+
+      <footer className="px-4 pb-8 pt-9 text-center">
+        <a
+          className="text-[11px] tracking-[0.04em] text-[var(--muted-color)] hover:text-[var(--text-color)]"
+          href="/admin"
+        >
+          {dictionary.admin}
+        </a>
+      </footer>
     </main>
   );
 }
@@ -112,9 +115,7 @@ function buildGalleryQuery(sortOrder: "newest" | "oldest", mediumFilter: string)
 
 function getChipClassName(isActive: boolean) {
   return [
-    "inline-flex rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.18em] transition-colors",
-    isActive
-      ? "border-[var(--text-color)] text-[var(--text-color)]"
-      : "border-[var(--border-color)] text-[var(--muted-color)] hover:border-[var(--text-color)] hover:text-[var(--text-color)]",
+    "tag-chip transition-colors",
+    isActive ? "tag-chip-active" : "tag-chip-idle",
   ].join(" ");
 }

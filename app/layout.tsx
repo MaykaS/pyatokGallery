@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans, PT_Serif } from "next/font/google";
+import { Cormorant_Garamond, Lora } from "next/font/google";
 
 import "./globals.css";
 
-const headingFont = PT_Serif({
+const headingFont = Cormorant_Garamond({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-pt-serif",
-  weight: ["400", "700"],
+  variable: "--font-cormorant",
+  weight: ["400", "600"],
 });
 
-const bodyFont = IBM_Plex_Sans({
+const bodyFont = Lora({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-ibm-plex-sans",
-  weight: ["400", "500"],
+  variable: "--font-lora",
+  weight: ["400", "600"],
 });
 
 export const metadata: Metadata = {

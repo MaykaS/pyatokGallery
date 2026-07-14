@@ -9,7 +9,7 @@ type LocaleToggleProps = {
 
 export function LocaleToggle({ currentPath, locale, t }: LocaleToggleProps) {
   return (
-    <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[var(--muted-color)]">
+    <div className="flex items-center gap-[6px] text-[12px] text-[var(--muted-color)]">
       <LocaleButton
         currentPath={currentPath}
         isActive={locale === "en"}
@@ -45,7 +45,7 @@ function LocaleButton({
       <input name="locale" type="hidden" value={locale} />
       <input name="redirectTo" type="hidden" value={currentPath} />
       <button
-        className={isActive ? "text-[var(--text-color)]" : "hover:text-[var(--text-color)]"}
+        className={isActive ? "font-semibold text-[var(--text-color)]" : "text-[var(--muted-color)] hover:text-[var(--text-color)]"}
         type="submit"
       >
         {label}

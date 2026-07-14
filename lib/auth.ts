@@ -3,7 +3,7 @@ import { createHash, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-export const ADMIN_SESSION_COOKIE = "sagalin-admin-session";
+export const ADMIN_SESSION_COOKIE = "pyatok-admin-session";
 
 export function isValidAdminPassword(candidatePassword: string) {
   const expectedPassword = process.env.ADMIN_PASSWORD;
@@ -23,7 +23,7 @@ export function createAdminSessionValue() {
   }
 
   return createHash("sha256")
-    .update(`sagalin-admin:${expectedPassword}`)
+    .update(`pyatok-admin:${expectedPassword}`)
     .digest("hex");
 }
 

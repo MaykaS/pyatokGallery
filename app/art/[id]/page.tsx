@@ -25,13 +25,13 @@ export default async function ArtworkDetailPage({
   }
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-4 pb-16 pt-6 sm:px-6 lg:px-8">
+    <main className="mx-auto flex min-h-screen w-full max-w-[900px] flex-col px-6 pb-8 pt-6">
       <Link className="ui-link self-start" href="/">
         {dictionary.backToGallery}
       </Link>
 
-      <section className="mx-auto mt-8 flex w-full max-w-3xl flex-col items-center">
-        <div className="art-plate w-full">
+      <section className="mx-auto mt-6 flex w-full flex-col items-center">
+        <div className="art-plate w-full max-w-[640px]">
           <img
             alt={artwork.title}
             className="h-auto w-full object-cover"
@@ -39,22 +39,22 @@ export default async function ArtworkDetailPage({
           />
         </div>
 
-        <div className="mt-6 text-center">
-          <h1 className="font-heading text-4xl italic tracking-tight text-[var(--text-color)] sm:text-5xl">
+        <div className="mt-[18px] text-center">
+          <h1 className="font-heading text-[26px] italic text-[var(--text-color)]">
             {artwork.title}
           </h1>
-          <p className="mt-2 text-sm uppercase tracking-[0.16em] text-[var(--muted-color)]">
+          <p className="mt-[6px] text-[13px] text-[var(--muted-color)]">
             {artwork.medium}, {artwork.year}
           </p>
 
           {artwork.dimensions ? (
-            <p className="mt-1 text-sm uppercase tracking-[0.16em] text-[var(--muted-color)]">
+            <p className="mt-[2px] text-[13px] text-[var(--muted-color)]">
               {artwork.dimensions}
             </p>
           ) : null}
         </div>
 
-        <p className="mt-8 max-w-2xl text-pretty text-base leading-8 text-[var(--soft-text-color)] sm:text-lg">
+        <p className="editorial-copy mt-6 max-w-[56ch] text-[15px] leading-[1.7] text-[var(--soft-text-color)]">
           {artwork.description}
         </p>
       </section>
