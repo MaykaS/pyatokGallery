@@ -40,7 +40,7 @@ export function AdminDashboard({ artworks, t }: AdminDashboardProps) {
         ? {
             id: editingArtwork.id,
             title: editingArtwork.title,
-            description: editingArtwork.description,
+            description: editingArtwork.description ?? "",
             medium: editingArtwork.medium,
             year: String(editingArtwork.year),
             dimensions: editingArtwork.dimensions ?? "",
@@ -324,7 +324,6 @@ function ArtworkEditorForm({
           defaultValue={defaultValues.description}
           id="description"
           name="description"
-          required
           rows={6}
         />
       </div>

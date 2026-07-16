@@ -3,7 +3,7 @@ export type Locale = "en" | "ru";
 export type ArtworkRow = {
   id: string;
   title: string;
-  description: string;
+  description: string | null;
   medium: string;
   year: number;
   image_url: string;
@@ -13,7 +13,7 @@ export type ArtworkRow = {
 
 export type ArtworkInsert = {
   title: string;
-  description: string;
+  description: string | null;
   medium: string;
   year: number;
   image_url: string;

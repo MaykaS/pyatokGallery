@@ -53,10 +53,14 @@ export default async function ArtworkDetailPage({
             </p>
           ) : null}
         </div>
+        
+        
+          {artwork.description?.trim() ? (
+            <p className="editorial-copy mt-6 max-w-[56ch] text-[15px] leading-[1.75] text-[var(--soft-text-color)] sm:leading-[1.7]">
+              {artwork.description}
+            </p>
+      ) : null}
 
-        <p className="editorial-copy mt-6 max-w-[56ch] text-[15px] leading-[1.75] text-[var(--soft-text-color)] sm:leading-[1.7]">
-          {artwork.description}
-        </p>
       </section>
     </main>
   );

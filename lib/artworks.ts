@@ -133,8 +133,8 @@ function parseArtworkFormData(formData: FormData) {
   const yearValue = String(formData.get("year") ?? "").trim();
   const dimensions = String(formData.get("dimensions") ?? "").trim();
 
-  if (!title || !description || !medium || !yearValue) {
-    throw new Error("Please fill in title, medium, year, and description.");
+  if (!title || !medium || !yearValue) {
+    throw new Error("Please fill in title, medium, and year.");
   }
 
   const year = Number(yearValue);
@@ -145,7 +145,7 @@ function parseArtworkFormData(formData: FormData) {
 
   return {
     title,
-    description,
+    description: description || null,
     medium,
     year,
     dimensions: dimensions || null,
