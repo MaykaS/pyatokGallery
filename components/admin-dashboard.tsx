@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useMemo, useRef, useState } from "react";
 
+import { getAdminPreviewUrl } from "@/lib/storage-image";
 import type { ArtworkRow, Dictionary } from "@/lib/types";
 
 type AdminDashboardProps = {
@@ -23,15 +23,16 @@ type FormState = {
 const COMMON_MEDIA = ["Painting", "Ceramics", "Drawing", "Mixed Media"];
 
 export function AdminDashboard({ artworks, t }: AdminDashboardProps) {
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const formRef = useRef<HTMLFormElement | null>(null);
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
   const [editingArtworkId, setEditingArtworkId] = useState<string | null>(null);
+  const [artworkItems, setArtworkItems] = useState(() => artworks);
 
   const editingArtwork = useMemo(
-    () => artworks.find((artwork) => artwork.id === editingArtworkId) ?? null,
-    [artworks, editingArtworkId],
+    () => artworkItems.find((artwork) => artwork.id === editingArtworkId) ?? null,
+    [artworkItems, editingArtworkId],
   );
 
   const formDefaults = useMemo<FormState>(
@@ -61,6 +62,7 @@ export function AdminDashboard({ artworks, t }: AdminDashboardProps) {
   async function handleSubmit(formData: FormData) {
     setError("");
     setStatusMessage("");
+    setIsSubmitting(true);
 
     const endpoint = editingArtwork
       ? `/api/admin/artworks/${editingArtwork.id}`
@@ -73,18 +75,37 @@ export function AdminDashboard({ artworks, t }: AdminDashboardProps) {
       body: formData,
     });
 
-    const payload = (await response.json()) as { error?: string };
+    const payload = (await response.json()) as {
+      artwork?: ArtworkRow;
+      error?: string;
+    };
 
     if (!response.ok) {
       setError(payload.error ?? t.saveError);
+      setIsSubmitting(false);
       return;
     }
 
+    if (!payload.artwork) {
+      setError(t.saveError);
+      setIsSubmitting(false);
+      return;
+    }
+
+    setArtworkItems((currentItems) => {
+      if (editingArtwork) {
+        return currentItems.map((artwork) =>
+          artwork.id === payload.artwork?.id ? payload.artwork : artwork,
+        );
+      }
+
+      return [payload.artwork, ...currentItems];
+    });
+
     setEditingArtworkId(null);
     setStatusMessage(editingArtwork ? t.updatedMessage : t.createdMessage);
-    startTransition(() => {
-      router.refresh();
-    });
+    formRef.current?.reset();
+    setIsSubmitting(false);
   }
 
   async function handleDelete(artwork: ArtworkRow) {
@@ -110,10 +131,10 @@ export function AdminDashboard({ artworks, t }: AdminDashboardProps) {
       setEditingArtworkId(null);
     }
 
+    setArtworkItems((currentItems) =>
+      currentItems.filter((currentArtwork) => currentArtwork.id !== artwork.id),
+    );
     setStatusMessage(t.deletedMessage);
-    startTransition(() => {
-      router.refresh();
-    });
   }
 
   return (
@@ -141,11 +162,13 @@ export function AdminDashboard({ artworks, t }: AdminDashboardProps) {
 
         <ArtworkEditorForm
           defaultValues={formDefaults}
-          isPending={isPending}
+          formRef={formRef}
+          isSubmitting={isSubmitting}
           onCancelEdit={() => {
             setEditingArtworkId(null);
             setError("");
             setStatusMessage("");
+            formRef.current?.reset();
           }}
           onSubmit={handleSubmit}
           showCancel={Boolean(editingArtwork)}
@@ -159,7 +182,7 @@ export function AdminDashboard({ artworks, t }: AdminDashboardProps) {
         </h2>
 
         <div className="mt-5 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-1">
-          {artworks.map((artwork) => (
+          {artworkItems.map((artwork) => (
             <article
               className="border border-[var(--border-color)] p-4"
               key={artwork.id}
@@ -186,8 +209,13 @@ export function AdminDashboard({ artworks, t }: AdminDashboardProps) {
               <div className="art-plate">
                 <img
                   alt={artwork.title}
-                  className="h-auto w-full object-cover"
-                  src={artwork.image_url}
+                  className="h-auto max-h-64 w-full object-contain"
+                  decoding="async"
+                  loading="lazy"
+                  src={getAdminPreviewUrl(artwork.image_url, {
+                    width: 320,
+                    height: 320,
+                  })}
                 />
               </div>
 
@@ -207,7 +235,8 @@ export function AdminDashboard({ artworks, t }: AdminDashboardProps) {
 
 type ArtworkEditorFormProps = {
   defaultValues: FormState;
-  isPending: boolean;
+  formRef: React.RefObject<HTMLFormElement | null>;
+  isSubmitting: boolean;
   onCancelEdit: () => void;
   onSubmit: (formData: FormData) => Promise<void>;
   showCancel: boolean;
@@ -216,7 +245,8 @@ type ArtworkEditorFormProps = {
 
 function ArtworkEditorForm({
   defaultValues,
-  isPending,
+  formRef,
+  isSubmitting,
   onCancelEdit,
   onSubmit,
   showCancel,
@@ -229,6 +259,7 @@ function ArtworkEditorForm({
       }}
       className="mt-6 space-y-5"
       key={defaultValues.id ?? "new-artwork"}
+      ref={formRef}
     >
       <div className="space-y-2">
         <label className="ui-label" htmlFor="image">
@@ -245,8 +276,13 @@ function ArtworkEditorForm({
           <div className="art-plate mt-4 max-w-xs">
             <img
               alt={defaultValues.title}
-              className="h-auto w-full object-cover"
-              src={defaultValues.currentImageUrl}
+              className="h-auto max-h-64 w-full object-contain"
+              decoding="async"
+              loading="lazy"
+              src={getAdminPreviewUrl(defaultValues.currentImageUrl, {
+                width: 320,
+                height: 320,
+              })}
             />
           </div>
         ) : null}
@@ -329,7 +365,7 @@ function ArtworkEditorForm({
       </div>
 
       <div className="flex flex-wrap gap-3">
-        <button className="ui-button" disabled={isPending} type="submit">
+        <button className="ui-button" disabled={isSubmitting} type="submit">
           {showCancel ? t.saveChanges : t.addArtwork}
         </button>
 
