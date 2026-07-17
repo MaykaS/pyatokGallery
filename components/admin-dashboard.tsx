@@ -92,14 +92,16 @@ export function AdminDashboard({ artworks, t }: AdminDashboardProps) {
       return;
     }
 
+    const savedArtwork = payload.artwork;
+
     setArtworkItems((currentItems) => {
       if (editingArtwork) {
         return currentItems.map((artwork) =>
-          artwork.id === payload.artwork?.id ? payload.artwork : artwork,
+          artwork.id === savedArtwork.id ? savedArtwork : artwork,
         );
       }
 
-      return [payload.artwork, ...currentItems];
+      return [savedArtwork, ...currentItems];
     });
 
     setEditingArtworkId(null);
